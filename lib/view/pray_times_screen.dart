@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:pray_times_api/controller/pray_time_controller.dart';
 import 'package:pray_times_api/model/pray_times_model.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class _PrayTimesViewState extends State<PrayTimesView> {
 
   @override
   void initState() {
+    
     super.initState();
     futureData = fetchAlbum();
   }
@@ -48,6 +50,35 @@ class _PrayTimesViewState extends State<PrayTimesView> {
           child: FutureBuilder<Data>(
             future: futureData,
             builder: (context, snapshot) {
+              var howManyMinutesToAdd = 40;
+
+              var fadjr = DateTime.parse(
+                  "0000-00-00 ${snapshot.data!.data.timings.fajr}");
+              var fadjrEdit = fadjr.add(Duration(minutes: howManyMinutesToAdd));
+
+              var dhuhr = DateTime.parse(
+                  "0000-00-00 ${snapshot.data!.data.timings.dhuhr}");
+              var dhuhrEdit = dhuhr.add(Duration(minutes: howManyMinutesToAdd));
+
+              var asr = DateTime.parse(
+                  "0000-00-00 ${snapshot.data!.data.timings.asr}");
+              var asrEdit = asr.add(Duration(minutes: howManyMinutesToAdd));
+
+              var maghrib = DateTime.parse(
+                  "0000-00-00 ${snapshot.data!.data.timings.maghrib}");
+              var maghribEdit =
+                  maghrib.add(Duration(minutes: howManyMinutesToAdd));
+
+              var isha = DateTime.parse(
+                  "0000-00-00 ${snapshot.data!.data.timings.isha}");
+              var ishaEdit = isha.add(Duration(minutes: howManyMinutesToAdd));
+
+
+
+              
+
+
+
               if (snapshot.hasData) {
                 return Center(
                   child: Padding(
@@ -99,10 +130,7 @@ class _PrayTimesViewState extends State<PrayTimesView> {
                                 Text('Fajr'),
                                 SizedBox(width: 20),
                                 Text(
-                                  (double.parse(snapshot.data!.data.timings.fajr
-                                              .replaceAll(':', '.')) +
-                                          00.03)
-                                      .toString(),
+                                  '${DateFormat('kk:mm').format(fadjrEdit)}'
                                 ),
                               ],
                             ),
@@ -134,11 +162,7 @@ class _PrayTimesViewState extends State<PrayTimesView> {
                                 Text('Dhuhr'),
                                 SizedBox(width: 20),
                                 Text(
-                                  (double.parse(snapshot
-                                              .data!.data.timings.dhuhr
-                                              .replaceAll(':', '.')) +
-                                          00.03)
-                                      .toString(),
+                                  '${DateFormat('kk:mm').format(dhuhrEdit)}'
                                 ),
                               ],
                             ),
@@ -170,10 +194,7 @@ class _PrayTimesViewState extends State<PrayTimesView> {
                                 Text('Asr'),
                                 SizedBox(width: 20),
                                 Text(
-                                  (double.parse(snapshot.data!.data.timings.asr
-                                              .replaceAll(':', '.')) +
-                                          00.03)
-                                      .toString(),
+                                  '${DateFormat('kk:mm').format(asrEdit)}'
                                 ),
                               ],
                             ),
@@ -205,11 +226,7 @@ class _PrayTimesViewState extends State<PrayTimesView> {
                                 Text('Maghrib'),
                                 SizedBox(width: 20),
                                 Text(
-                                  (double.parse(snapshot
-                                              .data!.data.timings.maghrib
-                                              .replaceAll(':', '.')) +
-                                          00.03)
-                                      .toString(),
+                                 '${DateFormat('kk:mm').format(maghribEdit)}'
                                 ),
                               ],
                             ),
@@ -241,11 +258,7 @@ class _PrayTimesViewState extends State<PrayTimesView> {
                                 Text('Isha'),
                                 SizedBox(width: 20),
                                 Text(
-                                  (double.parse(snapshot.data!.data.timings.isha
-                                              .replaceAll(':', '.')) +
-                                          00.03)
-                                      .toStringAsFixed(2)
-                                      .toString(),
+                                  '${DateFormat('kk:mm').format(ishaEdit)}'
                                 ),
                               ],
                             ),
