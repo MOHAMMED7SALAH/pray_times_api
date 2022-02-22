@@ -2,6 +2,7 @@ import 'dart:convert';
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 
+
 String dataToJson(Data data) => json.encode(data.toJson());
 
 class Data {
@@ -320,7 +321,7 @@ class Meta {
     final String latitudeAdjustmentMethod;
     final String midnightMode;
     final String school;
-    final Offset offset;
+    final Offsset offsset;
   Meta({
     required this.latitude,
     required this.longitude,
@@ -329,7 +330,7 @@ class Meta {
     required this.latitudeAdjustmentMethod,
     required this.midnightMode,
     required this.school,
-    required this.offset,
+    required this.offsset,
   });
 
     
@@ -346,7 +347,7 @@ class Meta {
         latitudeAdjustmentMethod: json["latitudeAdjustmentMethod"],
         midnightMode: json["midnightMode"],
         school: json["school"],
-        offset: Offset.fromJson(json["offset"]),
+        offsset: Offsset.fromJson(json["offset"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -357,7 +358,7 @@ class Meta {
         "latitudeAdjustmentMethod": latitudeAdjustmentMethod,
         "midnightMode": midnightMode,
         "school": school,
-        "offset": offset.toJson(),
+        "offset": offsset.toJson(),
     };
 }
 
@@ -414,7 +415,7 @@ class Params {
     };
 }
 
-class Offset {
+class Offsset {
     final int imsak;
     final int fajr;
     final int sunrise;
@@ -424,7 +425,7 @@ class Offset {
     final int sunset;
     final int isha;
     final int midnight;
-  Offset({
+  Offsset({
     required this.imsak,
     required this.fajr,
     required this.sunrise,
@@ -438,11 +439,11 @@ class Offset {
 
     
 
-    factory Offset.fromRawJson(String str) => Offset.fromJson(json.decode(str));
+    factory Offsset.fromRawJson(String str) => Offsset.fromJson(json.decode(str));
 
     String toRawJson() => json.encode(toJson());
 
-    factory Offset.fromJson(Map<String, dynamic> json) => Offset(
+    factory Offsset.fromJson(Map<String, dynamic> json) => Offsset(
         imsak: json["Imsak"],
         fajr: json["Fajr"],
         sunrise: json["Sunrise"],
