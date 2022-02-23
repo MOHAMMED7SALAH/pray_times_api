@@ -132,6 +132,7 @@ class _PrayTimesViewState extends State<PrayTimesView> {
                                 Text(
                                   '${DateFormat('kk:mm').format(fadjrEdit)}'
                                 ),
+                                //  Text(snapshot.data!.data.meta.timezone),
                               ],
                             ),
                           ),

@@ -1,14 +1,24 @@
 import 'dart:convert';
 
+import 'package:geolocator/geolocator.dart';
 import 'package:pray_times_api/model/pray_times_model.dart';
 import 'package:http/http.dart' as http;
 
 Future<Data> fetchAlbum() async {
-  String city = 'Damas';
-  String country = 'Syrie';
+  double pLat;
+  double pLong;
+  final position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.medium);
+
+  pLat = position.latitude;
+  pLong = position.longitude;
+
+  String date = DateTime.now().toIso8601String();
   int method = 4;
+
+    
   final response = await http.get(Uri.parse(
-      'http://api.aladhan.com/v1/timingsByCity?city=$city&country=$country&method=$method'));
+      "http://api.aladhan.com/v1/timings/$date?latitude=$pLat&longitude=$pLong&method=$method"));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -21,3 +31,5 @@ Future<Data> fetchAlbum() async {
     throw Exception('Failed to load album');
   }
 }
+
+
